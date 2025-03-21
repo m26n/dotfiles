@@ -9,6 +9,7 @@ echo ".cfg" >> .gitignore
 ```
 
 # Install on new machine
+## Clone repo
 ```
 git clone --bare https://github.com/m26n/dotfiles.git $HOME/.cfg
 ```
@@ -29,24 +30,27 @@ echo "alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'" >> $H
 source $HOME/.bashrc
 ```
 
-# Optional configuration
-## Only keep README.md and LICENSE file in remote
-Execute these commands after initial checkout to remove these files from local system **only**.
+## Overwrite existing files such as .zshrc or .bashrc
 ```
-config rm --cached README.md LICENSE
-rm $HOME/README.md $HOME/LICENSE
+config fetch
+config reset --hard main
 ```
-If you don't want these files locally, **ever**, then add this.
+
+# Handling **remote-only** files, such as README.md and LICENSE
 ```
-echo 'README.md' >> $HOME/.cfg/info/exclude
-echo 'LICENSE' >> $HOME/.cfg/info/exclude
-```
-If you want to edit these files locally, use `git show` with `config show`. This will make the files visible in your worktree.
-```
-config show README.md > $HOME/README.md
+config config core.sparseCheckout true
 ```
 ```
-config show LICENSE > $HOME/LICENSE
+echo '/*' > $HOME/.cfg/info/sparse-checkout
+echo '!README.md' >> $HOME/.cfg/info/sparse-checkout
+echo '!LICENSE' >> $HOME/.cfg/info/sparse-checkout
+```
+If you want to edit these files locally, use `config checkout`.
+```
+config checkout README.md 
+```
+```
+config checkout LICENSE 
 ```
 Make your changes, then commit and push them.
 ```
@@ -54,9 +58,9 @@ config add README.md LICENSE
 config commit -m "Update README and LICENSE"
 config push
 ```
-Finally, remove them from the local filesystem.
+Finally, remove them from the local filesystem by performing a checkout.
 ```
-rm $HOME/README.md $HOME/LICENSE
+config checkout
 ```
 
 # Usage
