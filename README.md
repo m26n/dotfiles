@@ -35,6 +35,9 @@ Execute these commands after initial checkout to remove these files from local s
 ```
 config rm --cached README.md LICENSE
 rm $HOME/README.md $HOME/LICENSE
+```
+If you don't want these files locally, **ever**, then add this.
+```
 echo 'README.md' >> $HOME/.cfg/info/exclude
 echo 'LICENSE' >> $HOME/.cfg/info/exclude
 ```
