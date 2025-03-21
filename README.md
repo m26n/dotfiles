@@ -41,6 +41,8 @@ echo 'LICENSE' >> $HOME/.cfg/info/exclude
 If you want to edit these files locally, use `git show` with `config show`. This will make the files visible in your worktree.
 ```
 config show README.md > $HOME/README.md
+```
+```
 config show LICENSE > $HOME/LICENSE
 ```
 Make your changes, then commit and push them.
