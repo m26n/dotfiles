@@ -15,8 +15,7 @@ git clone --bare https://github.com/m26n/dotfiles.git $HOME/.cfg
 ```
 
 # Add configuration
-> **ℹ️ Info**
-> 
+> [!NOTE]
 > Don't be confused by `config config`. The first `config` resolves to the alias, the second `config` is a parameter for `git`.
 ## ZSH
 ```
