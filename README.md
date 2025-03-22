@@ -15,6 +15,9 @@ git clone --bare https://github.com/m26n/dotfiles.git $HOME/.cfg
 ```
 
 # Add configuration
+> **ℹ️ Info**
+> 
+> Don't be confused by `config config`. The first `config` resolves to the alias, the second `config` is a parameter for `git`.
 ## ZSH
 ```
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
@@ -38,19 +41,16 @@ config reset --hard main
 
 # Handling **remote-only** files, such as README.md and LICENSE
 ```
-config config core.sparseCheckout true
-```
-```
 echo '/*' > $HOME/.cfg/info/sparse-checkout
 echo '!README.md' >> $HOME/.cfg/info/sparse-checkout
 echo '!LICENSE' >> $HOME/.cfg/info/sparse-checkout
 ```
-If you want to edit these files locally, remove the line from sparse-checkout and use `config checkout`.
+If you want to edit these files locally, use `show_remote_config_file`. This script is defined in `scripts/dotfiles/remote-files.sh`
 ```
-config checkout README.md 
+show_remote_config_file README.md 
 ```
 ```
-config checkout LICENSE 
+show_remote_config_file LICENSE 
 ```
 Make your changes, then commit and push them.
 ```
@@ -58,11 +58,13 @@ config add README.md LICENSE
 config commit -m "Update README and LICENSE"
 config push
 ```
-Finally, remove them from the local filesystem by performing a checkout.
+Finally, remove them from the local filesystem by using `hide_remote_config_file`. This script is defined in `scripts/dotfiles/remote-files.sh`
 ```
-config checkout
+hide_remote_config_file README.md 
 ```
-
+```
+hide_remote_config_file LICENSE 
+```
 # Usage
 View current status
 ```
