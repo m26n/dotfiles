@@ -45,7 +45,7 @@ echo '/*' > $HOME/.cfg/info/sparse-checkout
 echo '!README.md' >> $HOME/.cfg/info/sparse-checkout
 echo '!LICENSE' >> $HOME/.cfg/info/sparse-checkout
 ```
-If you want to edit these files locally, use `config checkout`.
+If you want to edit these files locally, remove the line from sparse-checkout and use `config checkout`.
 ```
 config checkout README.md 
 ```
